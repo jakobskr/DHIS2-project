@@ -7,3 +7,7 @@
     grid-template-columns: minmax(200px, auto) 1fr;
     grid-template-areas: "sidebar main";
 }
+
+p{
+    padding-left: 1em;
+}

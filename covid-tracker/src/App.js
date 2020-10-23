@@ -5,16 +5,12 @@ import { EntityList } from './EntityList'
 
 
 const MyApp = () => {
+    const [isEntityClicked, showDetails] = useState(-1)
 
     return (
-    <div className={styles.container}>
-        <div id='left-col'>
+        <div id='root'>
             <EntityList/>
         </div>
-        <div id='right-col'>
-            <p>Details here</p>
-        </div>
-    </div>
     
     )   
 }
