@@ -9,7 +9,8 @@ const entityQuery = {
       resource: "trackedEntityInstances",
       params: {
           ou: "FdM1UhBUx5y",
-            //Rakkestad, Viken kommune
+          fields: ["*"]  
+          //Rakkestad, Viken kommune
         },
         
     }
