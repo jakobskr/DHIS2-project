@@ -17,17 +17,29 @@ const query = {
 }
 
 const entityQuery = {
-    program: {
+    contact: {
       resource: "trackedEntityInstances",
       params: {
           ou: "FdM1UhBUx5y",
-
           //Rakkestad, Viken kommune
+          program: "DM9n1bUw8W8",
           fields:["*"]
 
         },
-    }
+    },
+
+    index: {
+        resource: "trackedEntityInstances",
+        params: {
+            ou: "FdM1UhBUx5y",
+            //Rakkestad, Viken kommune
+            program: "uYjxkTbwRNf",
+            fields:["*"]
+  
+          },
+      }
 }
+
 
 const attributeQuery = {
     program: {
@@ -89,10 +101,15 @@ const NewEntityList = () => {
                 </TableHead>
 
                 <TableBody>
-                {data.program.trackedEntityInstances.map((entity) => {
+                {data.index.trackedEntityInstances.map((entity) => {
                     //console.log(entity)
                     return <CaseTable prop = {entity}/>
-                })}          
+                })}    
+
+                {data.contact.trackedEntityInstances.map((entity) => {
+                    //console.log(entity)
+                    return <CaseTable prop = {entity}/>
+                })}              
                 
 
                 </TableBody>

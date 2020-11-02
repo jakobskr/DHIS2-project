@@ -18,27 +18,13 @@ const attributeQuery = {
 const CaseTable = (prop) => {
         const entity = prop.prop
         const ent = entity.trackedEntityInstance
-        console.log()
-        const id = "" + "BkEzFMEbvLt"
-        const {attrierror, attriloading, attdata} = useDataQuery(attributeQuery, { 
-            variables:  {
-            id : "BkEzFMEbvLt",
-            }})
-    
-        if(attrierror) {
-            console.log("error for " + ent)
-        }
-    
-        else if (attriloading) {
-            console.log("loading for " + ent)
-        }
-        console.log("sc " + attdata)
+        
         
         return (
             <TableRow key={entity.trackedEntityInstance}>
                 <TableCell className={styles.cell}> {getAttribute(entity.attributes, "First Name")} </TableCell>
                 <TableCell className={styles.cell}> {getAttribute(entity.attributes, "Surname")} </TableCell>
-                <TableCell className={styles.cell}> hepla </TableCell>
+                <TableCell className={styles.cell}> {getAttribute(entity.attributes, "Telephone (local)")} </TableCell>
                 <TableCell className={styles.cell}> {getAttribute(entity.attributes, "Date of birth")} </TableCell>
                 <TableCell className={styles.cell}> {entity.programOwners[0].program == "uYjxkTbwRNf" ? "Index case" : "Contact case" } </TableCell>
                 <TableCell className={styles.cell}> due date </TableCell>
