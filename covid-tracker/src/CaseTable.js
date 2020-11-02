@@ -27,6 +27,7 @@ const CaseTable = (prop) => {
                 <TableCell className={styles.cell}> {getAttribute(entity.attributes, "Telephone (local)")} </TableCell>
                 <TableCell className={styles.cell}> {getAttribute(entity.attributes, "Date of birth")} </TableCell>
                 <TableCell className={styles.cell}> {entity.programOwners[0].program == "uYjxkTbwRNf" ? "Index case" : "Contact case" } </TableCell>
+                <TableCell className={styles.cell}> Unknown </TableCell>
                 <TableCell className={styles.cell}> due date </TableCell>
                 <TableCell className={styles.cell}> <a href={Details(entity)} target="_blank">Details</a></TableCell>
             </TableRow>

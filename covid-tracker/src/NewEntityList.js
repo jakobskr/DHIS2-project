@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { useConfig, useDataQuery } from '@dhis2/app-runtime'
-import { Menu, MenuItem, Divider , Box, Table, TableBody, TableCell, TableRow,TableHead, TableCellHead, TableRowHead} from '@dhis2/ui'
+import {Checkbox, Menu, MenuItem, Divider , Box, Table, TableBody, TableCell, TableRow,TableHead, TableCellHead, TableRowHead} from '@dhis2/ui'
 import styles from './App.module.css'
 import { EntityList } from './EntityList'
 import {CaseTable} from './CaseTable'
@@ -67,6 +67,27 @@ const NewEntityList = () => {
     //const 
     return (
         <div>
+
+            <div className={styles.filterbox}>
+                <Checkbox
+                    label="Index Cases"
+                    name="indc"
+                    value="checked"
+                    onChange={() => {console.log("testing")}}
+                    disbaled="false">
+                </Checkbox>
+
+                <Checkbox
+                    
+                    label="Contact Cases"
+                    name="indc"
+                    value="default"
+                    onChange={() => {console.log("testing other")}}
+                    >
+                </Checkbox>
+
+            </div>
+
             <Table className={styles.table}>
                 <TableHead>
                     <TableRowHead>
@@ -91,6 +112,10 @@ const NewEntityList = () => {
                         </TableCellHead>
 
                         <TableCellHead className={styles.cell}>
+                            Program Stage 
+                        </TableCellHead>
+
+                        <TableCellHead className={styles.cell}>
                             Due date 
                         </TableCellHead>
 
@@ -106,10 +131,12 @@ const NewEntityList = () => {
                     return <CaseTable prop = {entity}/>
                 })}    
 
-                {data.contact.trackedEntityInstances.map((entity) => {
+                
+                {/*data.contact.trackedEntityInstances.map((entity) => {
                     //console.log(entity)
                     return <CaseTable prop = {entity}/>
-                })}              
+                })*/}
+                             
                 
 
                 </TableBody>
