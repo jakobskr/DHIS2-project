@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react"
 import { useConfig, useDataQuery } from '@dhis2/app-runtime'
 import { Menu, MenuItem, Divider , Box, Table, TableBody, TableCell, TableRow,TableHead, TableCellHead, TableRowHead} from '@dhis2/ui'
 import styles from './App.module.css'
+import { WorkLoadData } from "./WorkLoadData"
 
 
 const program_stages = {
@@ -18,10 +19,26 @@ console.log(today)
 
 const eventQuery = {
     program: {
-        resource: "events/eventRows",
+        resource: "events",
         params: ({start, end}) => ({
             orgUnit: "FdM1UhBUx5y",
             program: "uYjxkTbwRNf",
+            ouMode: "SELECTED",
+            programStatus: "ACTIVE",
+            eventStatus: "SCHEDULE",
+            startDate: start,
+            endDate: end,
+
+            //Rakkestad, Viken kommune
+        }),
+        
+    },
+
+    contacts: {
+        resource: "events",
+        params: ({start, end}) => ({
+            orgUnit: "FdM1UhBUx5y",
+            program: "DM9n1bUw8W8",
             ouMode: "SELECTED",
             programStatus: "ACTIVE",
             eventStatus: "SCHEDULE",
@@ -55,18 +72,18 @@ const WorkLoad = (props) => {
     }, [props.end, props.start])
 
 
-    const [clicked, setClicked] = useState(undefined)
+    const [clicked, setClicked] = useState(<p>Select a timeframe to generate an overview of future workload</p>)
 
     if (error) {
         return <p>Error</p>
     }
     if (loading) {
-        return <p>Loading</p>
+        return <p>Fetching events for the next {props.timeframe} upcoming days</p>
     }
 
-    {console.log(data)}
+    //{console.log(data)}
 
-    if(!data.program.eventRows) {
+    if(!data.program.events) {
         return <p>No events found between {props.start} and {props.end}</p>
     }
         
@@ -84,7 +101,7 @@ const WorkLoad = (props) => {
                         </TableCellHead>
 
                         <TableCellHead className={styles.cell}>
-                            First Name 
+                            Event name 
                         </TableCellHead>
                         
                         <TableCellHead className={styles.cell}>
@@ -108,33 +125,14 @@ const WorkLoad = (props) => {
 
                 <TableBody>
                                 
-                {data.program.eventRows.map((entity) => {
+                {data.program.events.map((entity) => {
                     console.log(entity)
-                    return (
-                        <TableRow key={entity.event+props.end+props.start}>
-                            <TableCell>
-                                {entity.dueDate}
-                            </TableCell>
+                    return <WorkLoadData event={entity}/>
+                })}
 
-                            <TableCell>
-                                {program_stages[entity.programStage]}
-                            </TableCell>
-
-                            <TableCell>
-                                {getAttribute(entity.attributes, "Fornavn")}
-                            </TableCell>
-                            <TableCell>
-                                {getAttribute(entity.attributes, "Etternavn")}
-                            </TableCell>
-                            <TableCell>
-                                {getAttribute(entity.attributes, "Fødselsdato")}
-                            </TableCell>
-
-                            <TableCell>
-                                <a href={Details(entity)} target="_blank">Details</a>
-                            </TableCell>
-                        </TableRow>
-                    )
+                {data.contacts.events.map((entity) => {
+                    console.log(entity)
+                    return <WorkLoadData event={entity}/>
                 })}
                              
                 

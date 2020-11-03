@@ -5,13 +5,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-11-03T12:06:52.877Z\n"
-"PO-Revision-Date: 2020-11-03T12:06:52.877Z\n"
+"POT-Creation-Date: 2020-11-03T14:46:56.694Z\n"
+"PO-Revision-Date: 2020-11-03T14:46:56.694Z\n"
 
 msgid "Menu"
-msgstr ""
-
-msgid "current EntityList"
 msgstr ""
 
 msgid "suggested entitylist"

@@ -10,7 +10,7 @@ const WorkLoadMain = () => {
     let start = gen_date(0)
     let end = gen_date(5)
 
-    const [clicked,setClicked] = useState(<p>loading</p>)
+    const [clicked,setClicked] = useState(<p>Select a timeframe to generate an overview of future workload</p>)
 
     
 
