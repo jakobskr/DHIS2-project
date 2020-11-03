@@ -73,6 +73,7 @@ const NewEntityList = () => {
                     label="Index Cases"
                     name="indc"
                     value="checked"
+                    
                     onChange={() => {console.log("testing")}}
                     disbaled="false">
                 </Checkbox>

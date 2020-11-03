@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import { useConfig, useDataQuery } from '@dhis2/app-runtime'
 import { Menu, MenuItem, Divider , Box, Table, TableBody, TableCell, TableRow,TableHead, TableCellHead, TableRowHead} from '@dhis2/ui'
 import styles from './App.module.css'
@@ -27,6 +27,7 @@ const eventQuery = {
             eventStatus: "SCHEDULE",
             startDate: start,
             endDate: end,
+
             //Rakkestad, Viken kommune
         }),
         
@@ -35,14 +36,25 @@ const eventQuery = {
 
 
 
-const WorkLoad = () => {
-        
-    const { error, loading, data } = useDataQuery(eventQuery, {
+
+const WorkLoad = (props) => {
+    console.log(props.start + " " + props.end)
+
+    const { error, loading, data, refetch } = useDataQuery(eventQuery, {
         variables: {
-            start: "2020-11-02",
-            end: "2020-11-07",
+            start: props.start,
+            end: props.end,
         },
     })
+
+    useEffect(() => {
+        refetch({
+            start: props.start,
+            end: props.end,
+        })
+    }, [props.end, props.start])
+
+
     const [clicked, setClicked] = useState(undefined)
 
     if (error) {
@@ -53,11 +65,18 @@ const WorkLoad = () => {
     }
 
     {console.log(data)}
-        
-        return (
-            
 
-            <Table className={styles.table}>
+    if(!data.program.eventRows) {
+        return <p>No events found between {props.start} and {props.end}</p>
+    }
+        
+        return (            
+
+
+            <div>
+
+                <h3>Workload for the next {props.timeframe} days</h3>
+                <Table className={styles.table} key={props.start+""+props.end} > 
                 <TableHead>
                     <TableRowHead>
                         <TableCellHead className={styles.cell}>
@@ -92,7 +111,7 @@ const WorkLoad = () => {
                 {data.program.eventRows.map((entity) => {
                     console.log(entity)
                     return (
-                        <TableRow key={entity.event}>
+                        <TableRow key={entity.event+props.end+props.start}>
                             <TableCell>
                                 {entity.dueDate}
                             </TableCell>
@@ -123,9 +142,15 @@ const WorkLoad = () => {
                 </TableBody>
 
             </Table>
+            </div>
+
+            
+            
             )
             
 }
+
+
 
 
 function fetch_data() {

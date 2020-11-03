@@ -1,16 +1,17 @@
 import React, {useState} from 'react'
 import i18n from '@dhis2/d2-i18n'
 import styles from './App.module.css'
-import { Menu, MenuItem, MenuSectionHeader, Checkbox } from '@dhis2/ui'
+import { Button, ButtonStrip, SplitButton, Menu, MenuItem, MenuSectionHeader, Checkbox } from '@dhis2/ui'
 import { EntityList } from './EntityList'
 import { NewEntityList } from './NewEntityList'
-import { WorkLoad } from './WorkLoad'
+import {  WorkLoad } from './WorkLoad'
+import {  WorkLoadMain } from './WorkLoadMain'
 
 
 
 
 const MyApp = () => {
-    const [clicked,setClicked] = useState(<WorkLoad/>)
+    const [clicked,setClicked] = useState(<NewEntityList/>)
     const [details, setDetails] = useState(undefined)
 
 
@@ -20,14 +21,7 @@ const MyApp = () => {
             <nav className={styles.menu} data-test-id="menu">
                 <MenuSectionHeader label={i18n.t('Menu')} />
                 <Menu>
-                    <MenuItem
-                        label={i18n.t('current EntityList')}
-                        dataTest="menu-programs"
-                        onClick={()=> {
-                            console.log("programs")
-                            setClicked(<EntityList/>)
-                        }}
-                    />
+
                     <MenuItem
                         label={i18n.t('suggested entitylist')}
                         dataTest="menu-dataSets"
@@ -40,7 +34,7 @@ const MyApp = () => {
                         label={i18n.t('Workload')}
                         dataTest="menu-dataSets"
                         onClick={()=> {console.log("workload")
-                                        setClicked(<WorkLoad/>)
+                                        setClicked(<WorkLoadMain/>)
                                         }}
                     />
                 </Menu>
