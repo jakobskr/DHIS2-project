@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import { useConfig, useDataQuery } from '@dhis2/app-runtime'
-import { Button, ButtonStrip, SplitButton,Menu, MenuItem, Divider , Box, Table, TableBody, TableCell, TableRow,TableHead, TableCellHead, TableRowHead} from '@dhis2/ui'
+import { InputField, Button, ButtonStrip, SplitButton,Menu, MenuItem, Divider , Box, Table, TableBody, TableCell, TableRow,TableHead, TableCellHead, TableRowHead} from '@dhis2/ui'
 import styles from './App.module.css'
 import {WorkLoad} from './WorkLoad'
 
@@ -12,7 +12,10 @@ const WorkLoadMain = () => {
 
     const [clicked,setClicked] = useState(<p>Select a timeframe to generate an overview of future workload</p>)
 
-    
+
+    const [startDate, setStartDate] = useState("2020-11-02")
+    const [endDate, setEndDate] = useState("2020-11-07")
+
 
     return (
         <div>   
@@ -21,6 +24,7 @@ const WorkLoadMain = () => {
         style={{
             border: '1px solid #c4c9cc',
             display: 'inline-block',
+            justifyContent: "center",
             padding: 8
         }}>
             <ButtonStrip dataTest ="dhis2-uicore-buttonstrip">
@@ -50,9 +54,29 @@ const WorkLoadMain = () => {
                 14-day
                 </Button>
                 
-                <SplitButton dataTest ="dhis2-uicore-splitbutton">
-                Label?
-                </SplitButton>
+                <InputField label="start-date" name="startDate"
+                type="date"
+                helpText="start date for events to track"
+                onChange={function logger(_ref){console.log(this)
+                    setStartDate(_ref.value)}}
+
+                value={startDate}/>
+
+                <InputField label="end-date" name="endDate"
+                type="date"
+                onChange={function logger(_ref){console.log(this)
+                            setEndDate(_ref.value)}}
+                helpText="end date for events to track"
+                value={endDate}/>
+                
+                <Button dataTest ="dhis2-uicore-button" type ="button"
+                    onClick={() => { console.log(check_timeframe(startDate, endDate))
+                        console.log(startDate + " " + endDate); 
+                    setClicked(<WorkLoad start={startDate} end={endDate} timeframe={check_timeframe(startDate, endDate)}/>)}}                   
+                >
+                enter
+                </Button>
+
             </ButtonStrip>
         </div>
 
@@ -64,6 +88,33 @@ const WorkLoadMain = () => {
     )
 
 }
+
+function update(_ref) {
+    console.log(_ref)
+    console.log(document.getElementsByName(_ref.name)[0])
+    document.getElementsByName(_ref.name)[0]._valueTracker.setValue(_ref.value)
+    //console.log(document.getElementsByName(_ref.name)[0])
+}
+
+function check_timeframe(d1, d2) {
+    let date1 = new Date(d1)
+    let date2= new Date(d2)
+    console.log(date1);
+    console.log(date2);
+    //Get 1 day in milliseconds
+    var one_day=1000*60*60*24;
+
+    // Convert both dates to milliseconds
+    var date1_ms = date1.getTime();
+    var date2_ms = date2.getTime();
+
+    // Calculate the difference in milliseconds
+    var difference_ms = date2_ms - date1_ms;
+
+    // Convert back to days and return
+    return Math.round(difference_ms/one_day); 
+    
+  }
 
 
 function gen_date(days) {
