@@ -49,7 +49,7 @@ const CompletedData = (event) => {
 
     const entity = data.program.trackedEntityInstances[0]
     //console.log(data)
-    console.log()
+    //console.log()
 
     return (
         <TableRow key={event.event.event}>
@@ -84,7 +84,6 @@ const CompletedData = (event) => {
                         </TableRow>
     )
 
-    {console.log(data)}
 
 
 }
@@ -95,7 +94,7 @@ const Details = props => {
     //console.log(baseUrl)
     const moreDetailsURL = baseUrl + "/dhis-web-tracker-capture/index.html#/dashboard?tei=" +
                             entity.trackedEntityInstance + "&program=" + entity.program + "&ou=" + entity.orgUnit 
-    console.log(entity)
+    //console.log(entity)
     //console.log(moreDetailsURL)
     //Link seems to work when pressing it in the console page but when using the more details link in page, it redirects to dashboard incorrectly. 
     return moreDetailsURL

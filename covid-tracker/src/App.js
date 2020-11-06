@@ -25,7 +25,7 @@ const MyApp = () => {
                 <Menu>
 
                     <MenuItem
-                        label={i18n.t('Daily workload')}
+                        label={i18n.t('Daily Workload')}
                         dataTest="menu-dataSets"
                         onClick={()=> {setClicked(<NewEntityList/>)}}
                     />
@@ -46,13 +46,13 @@ const MyApp = () => {
                     />
 
                     <MenuItem
-                        label={i18n.t('Completed events')}
+                        label={i18n.t('Completed Events')}
                         dataTest="menu-dataSets"
                         onClick={()=> {setClicked(<Complete/>)}}
                     />
 
                     <MenuItem
-                        label={i18n.t('Overdue')}
+                        label={i18n.t('Overdue Events')}
                         dataTest="menu-dataSets"
                         onClick={()=> {setClicked(<Overdue/>)}}
                     />
