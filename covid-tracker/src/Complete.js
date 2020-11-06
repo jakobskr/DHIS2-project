@@ -16,64 +16,38 @@ const program_stages = {
 
 const today = gen_date(0);
 const next_week = gen_date(7);
-console.log(today)
 
 const eventQuery = {
     program: {
         resource: "events",
-        params: ({start, end}) => ({
-            orgUnit: "EwEP9IhOwuw",
+        params: {
+            orgUnit: "FdM1UhBUx5y",
             program: "uYjxkTbwRNf",
             ouMode: "SELECTED",
-            eventStatus: "COMPLETED",
-            programStatus: "COMPLETED",
-
-            startDate: start,
-            endDate: end,
-
+            status: "COMPLETED",
             //Rakkestad, Viken kommune
-        }),
+        },
 
     },
 
     contacts: {
         resource: "events",
-        params: ({start, end}) => ({
-            orgUnit: "EwEP9IhOwuw",
+        params: {
+            orgUnit: "FdM1UhBUx5y",
             program: "DM9n1bUw8W8",
             ouMode: "SELECTED",
-            eventStatus: "COMPLETED",
-            programStatus: "COMPLETED",
-
-            startDate: start,
-            endDate: end,
+            status: "COMPLETED",
 
             //Rakkestad, Viken kommune
-        }),
+        },
 
     }
 }
 
 
-
-
 const Complete = (props) => {
-    console.log(props.start + " " + props.end)
 
-    const { error, loading, data, refetch } = useDataQuery(eventQuery, {
-        variables: {
-            start: props.start,
-            end: props.end,
-        },
-    })
-
-    useEffect(() => {
-        refetch({
-            start: props.start,
-            end: props.end,
-        })
-    }, [props.end, props.start])
-
+    const { error, loading, data, refetch } = useDataQuery(eventQuery)
 
     const [clicked, setClicked] = useState(<p>Select a timeframe to generate an overview of future workload</p>)
 
@@ -81,7 +55,7 @@ const Complete = (props) => {
         return <p>Error</p>
     }
     if (loading) {
-        return <p>Fetching events for the next {props.timeframe} upcoming days</p>
+        return <p>fetching completed events</p>
     }
 
     //{console.log(data)}
@@ -89,12 +63,8 @@ const Complete = (props) => {
     if(!data.program.events) {
         return <p>No events found between {props.start} and {props.end}</p>
     }
-
         return (
-
-
             <div>
-
                 <h3>Completed events</h3>
                 <Table className={styles.table} key={props.start+""+props.end} >
                 <TableHead>
@@ -129,23 +99,17 @@ const Complete = (props) => {
 
                     </TableRowHead>
                 </TableHead>
-
                 <TableBody>
 
                 {data.program.events.map((entity) => {
-                    console.log(entity)
                     return <CompletedData event={entity}/>
                 })}
 
                 {data.contacts.events.map((entity) => {
-                    console.log(entity)
                     return <CompletedData event={entity}/>
                 })}
 
-
-
                 </TableBody>
-
             </Table>
             </div>
 
@@ -165,11 +129,8 @@ function fetch_data() {
 const Details = props => {
     const {baseUrl} = useConfig()
     const entity = props
-    //console.log(baseUrl)
     const moreDetailsURL = baseUrl + "/dhis-web-tracker-capture/index.html#/dashboard?tei=" +
                             entity.trackedEntityInstance + "&program=" + entity.program + "&ou=" + entity.orgUnit
-    console.log(entity)
-    //console.log(moreDetailsURL)
     //Link seems to work when pressing it in the console page but when using the more details link in page, it redirects to dashboard incorrectly.
     return moreDetailsURL
 }

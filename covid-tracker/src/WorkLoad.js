@@ -15,7 +15,7 @@ const program_stages = {
 
 const today = gen_date(0);
 const next_week = gen_date(7);
-console.log(today)
+//console.log(today)
 
 const eventQuery = {
     program: {
@@ -25,7 +25,7 @@ const eventQuery = {
             program: "uYjxkTbwRNf",
             ouMode: "SELECTED",
             programStatus: "ACTIVE",
-            eventStatus: "SCHEDULE",
+            status: "SCHEDULE",
             startDate: start,
             endDate: end,
 
@@ -41,7 +41,7 @@ const eventQuery = {
             program: "DM9n1bUw8W8",
             ouMode: "SELECTED",
             programStatus: "ACTIVE",
-            eventStatus: "SCHEDULE",
+            status: "SCHEDULE",
             startDate: start,
             endDate: end,
 
@@ -55,7 +55,7 @@ const eventQuery = {
 
 
 const WorkLoad = (props) => {
-    console.log(props.start + " " + props.end)
+    //console.log(props.start + " " + props.end)
 
     const { error, loading, data, refetch } = useDataQuery(eventQuery, {
         variables: {
@@ -81,7 +81,6 @@ const WorkLoad = (props) => {
         return <p>Fetching events for the next {props.timeframe} upcoming days</p>
     }
 
-    {console.log(data)}
 
     if(!data.program.events) {
         return <p>No events found between {props.start} and {props.end}</p>
@@ -122,28 +121,18 @@ const WorkLoad = (props) => {
                       
                     </TableRowHead>
                 </TableHead>
-
                 <TableBody>
-                                
+
                 {data.program.events.map((entity) => {
-                    console.log(entity)
                     return <WorkLoadData event={entity}/>
                 })}
 
                 {data.contacts.events.map((entity) => {
-                    console.log(entity)
                     return <WorkLoadData event={entity}/>
                 })}
-                             
-                
-
                 </TableBody>
-
             </Table>
             </div>
-
-            
-            
             )
             
 }

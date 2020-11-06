@@ -20,36 +20,30 @@ const WorkLoadMain = () => {
     return (
         <div>   
 
-        <div
-        style={{
-            border: '1px solid #c4c9cc',
-            display: 'inline-block',
-            justifyContent: "center",
-            padding: 8
-        }}>
-            <ButtonStrip dataTest ="dhis2-uicore-buttonstrip" className={styles.ButtonStrip}>
-                <Button dataTest ="dhis2-uicore-button" type="button"
+        <div className={styles.buttonStripBox}>
+            <ButtonStrip dataTest ="dhis2-uicore-buttonstrip" className={styles.buttonStrip}>
+                <Button className={styles.button} dataTest ="dhis2-uicore-button" type="button"
                     onClick={() => {
-                        setClicked(<WorkLoad start={gen_date(0)} end={gen_date(5)} timeframe={5}/>)
+                        setClicked(<WorkLoad start={"2020-11-01"} end={"2020-11-06"} timeframe={5}/>)
                         }}
                     >
                     5-day
                 </Button>
-                <Button dataTest="dhis2-uicore-button" type="button"
+                <Button className={styles.button} dataTest="dhis2-uicore-button" type="button"
                     onClick={() => {setClicked(undefined) 
-                        setClicked(<WorkLoad start={gen_date(0)} end={gen_date(3)} timeframe={7}/>)}}
+                        setClicked(<WorkLoad start={"2020-11-01"} end={"2020-11-08"} timeframe={7}/>)}}
 
                 >
                 7-day
                 </Button>
             
-                <Button dataTest="dhis2-uicore-button" type ="button"
-                    onClick={() => setClicked(<WorkLoad start={gen_date(0)} end={gen_date(10)} timeframe={10}/>)}                    
+                <Button className={styles.button} dataTest="dhis2-uicore-button" type ="button"
+                    onClick={() => setClicked(<WorkLoad start={"2020-11-01"} end={"2020-11-11"} timeframe={10}/>)}                    
                 >
                 10-day
                 </Button>
-                <Button dataTest ="dhis2-uicore-button" type ="button"
-                    onClick={() => setClicked(<WorkLoad start={gen_date(0)} end={gen_date(14)} timeframe={14}/>)}                    
+                <Button className={styles.button} dataTest ="dhis2-uicore-button" type ="button"
+                    onClick={() => setClicked(<WorkLoad start={"2020-11-01"} end={"2020-11-15"} timeframe={14}/>)}                    
                 >
                 14-day
                 </Button>
@@ -69,7 +63,7 @@ const WorkLoadMain = () => {
                 helpText="end date for events to track"
                 value={endDate}/>
                 
-                <Button dataTest ="dhis2-uicore-button" type ="button"
+                <Button className={styles.button} dataTest ="dhis2-uicore-button" type ="button"
                     onClick={() => { console.log(check_timeframe(startDate, endDate))
                         console.log(startDate + " " + endDate); 
                     setClicked(<WorkLoad start={startDate} end={endDate} timeframe={check_timeframe(startDate, endDate)}/>)}}                   

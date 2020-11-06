@@ -1,19 +1,20 @@
 import React, {useState} from 'react'
 import i18n from '@dhis2/d2-i18n'
 import styles from './App.module.css'
-import { Button, ButtonStrip, SplitButton, Menu, MenuItem, MenuSectionHeader, Checkbox } from '@dhis2/ui'
+import { Button, ButtonStrip, SplitButton, Menu, MenuItem, MenuSectionHeader, MenuDivider, Checkbox } from '@dhis2/ui'
 import { EntityList } from './EntityList'
 import { NewEntityList } from './NewEntityList'
 import {  WorkLoad } from './WorkLoad'
 import {  WorkLoadMain } from './WorkLoadMain'
 import { Complete } from './Complete'
+import { Overdue } from './Overdue'
+import { CasesOverview } from './CasesOverview'
 
 
 
 
 const MyApp = () => {
     const [clicked,setClicked] = useState(<NewEntityList/>)
-    const [details, setDetails] = useState(undefined)
 
 
     return (
@@ -24,27 +25,36 @@ const MyApp = () => {
                 <Menu>
 
                     <MenuItem
-                        label={i18n.t('Entitylist')}
+                        label={i18n.t('Daily workload')}
                         dataTest="menu-dataSets"
-                        onClick={()=> {console.log("datasets")
-                                        setClicked(<NewEntityList/>)
-                                        }}
+                        onClick={()=> {setClicked(<NewEntityList/>)}}
+                    />
+
+                <MenuDivider/>
+
+
+                <MenuItem
+                        label={i18n.t('Case Overview')}
+                        dataTest="menu-dataSets"
+                        onClick={()=> {setClicked(<CasesOverview/>)}}
                     />
 
                 <MenuItem
-                        label={i18n.t('Workload')}
+                        label={i18n.t('Future Workload')}
                         dataTest="menu-dataSets"
-                        onClick={()=> {console.log("workload")
-                                        setClicked(<WorkLoadMain/>)
-                                        }}
+                        onClick={()=> {setClicked(<WorkLoadMain/>)}}
                     />
 
                     <MenuItem
                         label={i18n.t('Completed events')}
                         dataTest="menu-dataSets"
-                        onClick={()=> {console.log("workload")
-                                        setClicked(<Complete/>)
-                                        }}
+                        onClick={()=> {setClicked(<Complete/>)}}
+                    />
+
+                    <MenuItem
+                        label={i18n.t('Overdue')}
+                        dataTest="menu-dataSets"
+                        onClick={()=> {setClicked(<Overdue/>)}}
                     />
 
                 </Menu>

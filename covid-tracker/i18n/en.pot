@@ -5,19 +5,25 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-11-06T15:20:07.998Z\n"
-"PO-Revision-Date: 2020-11-06T15:20:07.998Z\n"
+"POT-Creation-Date: 2020-11-06T20:51:19.621Z\n"
+"PO-Revision-Date: 2020-11-06T20:51:19.621Z\n"
 
 msgid "Menu"
 msgstr ""
 
-msgid "Entitylist"
+msgid "Daily workload"
 msgstr ""
 
-msgid "Workload"
+msgid "Case Overview"
+msgstr ""
+
+msgid "Future Workload"
 msgstr ""
 
 msgid "Completed events"
+msgstr ""
+
+msgid "Overdue"
 msgstr ""
 
 msgid "EntityList"

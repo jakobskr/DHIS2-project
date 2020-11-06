@@ -4,6 +4,7 @@ import {Button, Checkbox, Menu, MenuItem, Divider , Box, Table, TableBody, Table
 import styles from './App.module.css'
 import { EntityList } from './EntityList'
 import {CaseTable} from './CaseTable'
+import {NewEntityList} from "./NewEntityList"
 
 const program_stages = {
     "LpWNjNGvCO5": "Clinical examination and diagnosis",
@@ -52,16 +53,12 @@ const attributeQuery = {
     }
 }
 
-//for testing/demonstration purposes, today is hardcoded such that we actually have events.
-const today = "2020-11-02"
-
-const NewEntityList = () => {
+const CasesOverview = () => {
     const { error, loading, data } = useDataQuery(entityQuery)
     const [clicked, setClicked] = useState(undefined)
     const [indexChecked, setIndexChecked] = useState(false)
     const [contactChecked, setContactChecked] = useState(false)
     const [contactsClicked, setContactsClicked] = useState(undefined)
-
 
     let a = false
     if (error) {
@@ -74,8 +71,7 @@ const NewEntityList = () => {
     //const 
     return (
         <div className={styles.mainList}>
-            <h2>Daily WorkLoad</h2>
-            <h3>task to be completed as of today [{today}]</h3>
+            <h2>Overview of all tracked cases</h2>
             <div className={styles.filterBox}>
                 <h4>Filter</h4>
 
@@ -112,7 +108,7 @@ const NewEntityList = () => {
                             setIndexChecked(false)
                         }
 
-                       }}                    >
+                        }}                    >
                 </Checkbox>
 
             </div>
@@ -146,6 +142,10 @@ const NewEntityList = () => {
                         </TableCellHead>
 
                         <TableCellHead className={styles.cell}>
+                            Due Date 
+                        </TableCellHead>
+
+                        <TableCellHead className={styles.cell}>
                             Number of Contacts 
                         </TableCellHead>
 
@@ -165,10 +165,10 @@ const NewEntityList = () => {
                     return render_cases(entity, setContactsClicked)
                 })}    
 
-                {(contactChecked || !indexChecked) && data.contact.trackedEntityInstances.map((entity) => {
+                
+                {(!indexChecked || contactChecked) && data.contact.trackedEntityInstances.map((entity) => {
                     return render_cases(entity, setContactsClicked)
-                })}    
-
+                })}
                 </TableBody>
             </Table>
 
@@ -198,23 +198,24 @@ function getAttribute(attributes , prop) {
     
 }
 
-function due_today(entity) {
+function dueDay(entity) {
+    //console.log(entity)
+
     for (let index = 0; index < entity.enrollments[0].events.length; index++) {
         const element = entity.enrollments[0].events[index];
         let dueDate = element.dueDate
         let realdueDate = dueDate.substring(0,10)
-        if (realdueDate == today && element.status != "COMPLETED") {
-            return program_stages[element.programStage]
+        if (element.status != "COMPLETED") {
+            return [program_stages[element.programStage], element.dueDate]
         }
     }
 
-    return false
+    return ["COMPLETED", "COMPLETED"]
 } 
 
 function render_cases(entity, func) {
-    let stage = due_today(entity)
-    if (stage) {
-        
+
+        let event_info = dueDay(entity)        
         return (
             <TableRow key={entity.trackedEntityInstance}>
                 <TableCell className={styles.cell}> {getAttribute(entity.attributes, "First Name")} </TableCell>
@@ -222,7 +223,8 @@ function render_cases(entity, func) {
                 <TableCell className={styles.cell}> {getAttribute(entity.attributes, "Telephone (local)")} </TableCell>
                 <TableCell className={styles.cell}> {getAttribute(entity.attributes, "Date of birth")} </TableCell>
                 <TableCell className={styles.cell}> {entity.programOwners[0].program == "uYjxkTbwRNf" ? "Index case" : "Contact case" } </TableCell>
-                <TableCell className={styles.cell}>  {stage} </TableCell>
+                <TableCell className={styles.cell}>  {event_info[0]} </TableCell>
+                <TableCell className={styles.cell}>  {event_info[1]} </TableCell>
                 <TableCell className={styles.cell}> {entity.relationships.length} </TableCell>
                 <TableCell className={styles.cell}> 
                     <Button className={styles.button} dataTest ="dhis2-uicore-button" type ="button"
@@ -232,7 +234,7 @@ function render_cases(entity, func) {
 
                 <TableCell className={styles.cell}> <a href={Details(entity)} target="_blank">Details</a></TableCell>
             </TableRow>
-            )}
+            )
 }
 
 function render_contacts(relationships, from) {
@@ -276,4 +278,4 @@ function render_contacts(relationships, from) {
 
 
 
-export { NewEntityList }
+export { CasesOverview }

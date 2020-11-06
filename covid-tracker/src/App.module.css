@@ -20,9 +20,36 @@
     justify-content: flex-start;
 }
 
+.buttonStripBox{
+    padding-top: 5px;
+}
+
 .buttonStrip{
+    padding-top: 5px;
+    margin-top: 20px;
+    border: 1px solid #c4c9cc;
     display: flex;
-    justify-content: center;
+    background-color: gainsboro;
+    justify-content: flex-start;
+    padding: 8;
+}
+
+
+
+.main {
+    width:  2000px;
+    margin-left: 43px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.button{
+    justify-self: center;
+    padding: 10px;
+}
+
+.contacts{
+    border: 1px solid black;
 }
 
 .filterBox{
@@ -39,6 +66,11 @@
     padding-bottom: 5px;
 }
 
+h4{
+    margin-left: 30px;
+    padding-left: 30px;
+}
+
 .filterBox h4{
     margin-left: 5px;
     padding-left: 5px;
@@ -49,12 +81,33 @@ p{
     padding-left: 1em;
 }
 
+.tables{
+    display: flex;
+    justify-content: space-evenly;
+}
 
 .table{
-    width: 1000px;
-    justify-content: center;
+    height: auto;
+    margin-right: 30px;
+    padding-right: 30px;
+}
+
+.details{
+    margin-left: 40px;
+    padding-left: ;
+}
+
+.table2{
+    width: 500px;
+    padding-left: 100px;
+    margin-left: 100px;
+    float: right;
 }
 
 .cell{
-    width: 80px;
+    width: 60px;
+}
+
+.cell2{
+    width: 300px;
 }

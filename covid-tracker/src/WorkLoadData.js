@@ -41,18 +41,14 @@ const WorkLoadData = (event) => {
     const [clicked, setClicked] = useState(undefined)
 
     if (error) {
-        return <p>Error</p>
+        return <TableRow><TableCell colSpan="7">error</TableCell></TableRow>
     }
     if (loading) {
-        return <p>Loading</p>
+        return <TableRow><TableCell colSpan="7">loading</TableCell></TableRow>
     }
 
-    //console.log(data)
 
     const entity = data.program.trackedEntityInstances[0]
-    //console.log(data)
-    console.log(entity)
-
     return (
         <TableRow key={event.event.event}>
                             <TableCell>
@@ -76,21 +72,16 @@ const WorkLoadData = (event) => {
                             <TableCell>
                                 <a href={Details(event.event)} target="_blank">Details</a>
                             </TableCell>
-                        </TableRow>
+    </TableRow>
     )
-
-    {console.log(data)}
-
-
 }
 
 const Details = props => {
     const {baseUrl} = useConfig()
     const entity = props
-    //console.log(baseUrl)
     const moreDetailsURL = baseUrl + "/dhis-web-tracker-capture/index.html#/dashboard?tei=" +
                             entity.trackedEntityInstance + "&program=" + entity.program + "&ou=" + entity.orgUnit 
-    console.log(entity)
+    //onsole.log(entity)
     //console.log(moreDetailsURL)
     //Link seems to work when pressing it in the console page but when using the more details link in page, it redirects to dashboard incorrectly. 
     return moreDetailsURL

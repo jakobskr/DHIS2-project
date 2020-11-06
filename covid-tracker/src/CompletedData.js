@@ -39,7 +39,7 @@ const CompletedData = (event) => {
     const [clicked, setClicked] = useState(undefined)
 
     if (error) {
-        return <p>Error</p>
+        return <TableRow><TableCell colSpan="7">error</TableCell></TableRow>
     }
     if (loading) {
         return <TableRow><TableCell colSpan="7">loading</TableCell></TableRow>
