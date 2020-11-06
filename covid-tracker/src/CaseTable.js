@@ -19,7 +19,6 @@ const CaseTable = (prop) => {
         const entity = prop.prop
         const ent = entity.trackedEntityInstance
         
-        
         return (
             <TableRow key={entity.trackedEntityInstance}>
                 <TableCell className={styles.cell}> {getAttribute(entity.attributes, "First Name")} </TableCell>

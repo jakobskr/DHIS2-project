@@ -3,6 +3,7 @@ import { useConfig, useDataQuery } from '@dhis2/app-runtime'
 import { Menu, MenuItem, Divider , Box, Table, TableBody, TableCell, TableRow,TableHead, TableCellHead, TableRowHead} from '@dhis2/ui'
 import styles from './App.module.css'
 import { WorkLoadData } from "./WorkLoadData"
+import { CompletedData } from "./CompletedData"
 
 
 const program_stages = {
@@ -21,40 +22,42 @@ const eventQuery = {
     program: {
         resource: "events",
         params: ({start, end}) => ({
-            orgUnit: "FdM1UhBUx5y",
+            orgUnit: "EwEP9IhOwuw",
             program: "uYjxkTbwRNf",
             ouMode: "SELECTED",
-            programStatus: "ACTIVE",
-            eventStatus: "SCHEDULE",
+            eventStatus: "COMPLETED",
+            programStatus: "COMPLETED",
+
             startDate: start,
             endDate: end,
 
             //Rakkestad, Viken kommune
         }),
-        
+
     },
 
     contacts: {
         resource: "events",
         params: ({start, end}) => ({
-            orgUnit: "FdM1UhBUx5y",
+            orgUnit: "EwEP9IhOwuw",
             program: "DM9n1bUw8W8",
             ouMode: "SELECTED",
-            programStatus: "ACTIVE",
-            eventStatus: "SCHEDULE",
+            eventStatus: "COMPLETED",
+            programStatus: "COMPLETED",
+
             startDate: start,
             endDate: end,
 
             //Rakkestad, Viken kommune
         }),
-        
+
     }
 }
 
 
 
 
-const WorkLoad = (props) => {
+const Complete = (props) => {
     console.log(props.start + " " + props.end)
 
     const { error, loading, data, refetch } = useDataQuery(eventQuery, {
@@ -81,71 +84,75 @@ const WorkLoad = (props) => {
         return <p>Fetching events for the next {props.timeframe} upcoming days</p>
     }
 
-    {console.log(data)}
+    //{console.log(data)}
 
     if(!data.program.events) {
         return <p>No events found between {props.start} and {props.end}</p>
     }
-        
-        return (            
+
+        return (
 
 
             <div>
 
-                <h3>Workload for the next {props.timeframe} days</h3>
-                <Table className={styles.table} key={props.start+""+props.end} > 
+                <h3>Completed events</h3>
+                <Table className={styles.table} key={props.start+""+props.end} >
                 <TableHead>
                     <TableRowHead>
                         <TableCellHead className={styles.cell}>
-                            Due date 
+                            Completion date
                         </TableCellHead>
 
                         <TableCellHead className={styles.cell}>
-                            Event name 
-                        </TableCellHead>
-                        
-                        <TableCellHead className={styles.cell}>
-                            First Name 
+                            Completed by
                         </TableCellHead>
 
                         <TableCellHead className={styles.cell}>
-                            Surname 
+                            Event name
                         </TableCellHead>
 
                         <TableCellHead className={styles.cell}>
-                            dob 
+                            First Name
+                        </TableCellHead>
+
+                        <TableCellHead className={styles.cell}>
+                            Surname
+                        </TableCellHead>
+
+                        <TableCellHead className={styles.cell}>
+                            dob
                         </TableCellHead>
 
                         <TableCellHead className={styles.cell}>
                             details
                         </TableCellHead>
-                      
+
                     </TableRowHead>
                 </TableHead>
 
                 <TableBody>
-                                
+
                 {data.program.events.map((entity) => {
                     console.log(entity)
-                    return <WorkLoadData event={entity}/>
+                    return <CompletedData event={entity}/>
                 })}
 
                 {data.contacts.events.map((entity) => {
                     console.log(entity)
-                    return <WorkLoadData event={entity}/>
+                    return <CompletedData event={entity}/>
                 })}
-                             
-                
+
+
 
                 </TableBody>
 
             </Table>
             </div>
 
-            
-            
+
+
             )
-            
+
 }
 
 
@@ -160,10 +167,10 @@ const Details = props => {
     const entity = props
     //console.log(baseUrl)
     const moreDetailsURL = baseUrl + "/dhis-web-tracker-capture/index.html#/dashboard?tei=" +
-                            entity.trackedEntityInstance + "&program=" + entity.program + "&ou=" + entity.orgUnit 
+                            entity.trackedEntityInstance + "&program=" + entity.program + "&ou=" + entity.orgUnit
     console.log(entity)
     //console.log(moreDetailsURL)
-    //Link seems to work when pressing it in the console page but when using the more details link in page, it redirects to dashboard incorrectly. 
+    //Link seems to work when pressing it in the console page but when using the more details link in page, it redirects to dashboard incorrectly.
     return moreDetailsURL
 }
 
@@ -180,6 +187,6 @@ function getAttribute(attributes , prop) {
         if(element.displayName == prop) {
             return element.value}
     }
-    
+
 }
-export { WorkLoad }
+export { Complete }

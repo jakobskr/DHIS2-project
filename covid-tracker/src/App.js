@@ -6,6 +6,7 @@ import { EntityList } from './EntityList'
 import { NewEntityList } from './NewEntityList'
 import {  WorkLoad } from './WorkLoad'
 import {  WorkLoadMain } from './WorkLoadMain'
+import { Complete } from './Complete'
 
 
 
@@ -23,7 +24,7 @@ const MyApp = () => {
                 <Menu>
 
                     <MenuItem
-                        label={i18n.t('suggested entitylist')}
+                        label={i18n.t('Entitylist')}
                         dataTest="menu-dataSets"
                         onClick={()=> {console.log("datasets")
                                         setClicked(<NewEntityList/>)
@@ -37,7 +38,18 @@ const MyApp = () => {
                                         setClicked(<WorkLoadMain/>)
                                         }}
                     />
+
+                    <MenuItem
+                        label={i18n.t('Completed events')}
+                        dataTest="menu-dataSets"
+                        onClick={()=> {console.log("workload")
+                                        setClicked(<Complete/>)
+                                        }}
+                    />
+
                 </Menu>
+
+                
             </nav>
 
 

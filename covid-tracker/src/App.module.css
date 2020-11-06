@@ -20,6 +20,31 @@
     justify-content: flex-start;
 }
 
+.buttonStrip{
+    display: flex;
+    justify-content: center;
+}
+
+.filterBox{
+    background-color: gainsboro;
+    margin-top: 10px;
+    padding-bottom: 5;
+    width: 300px;
+    margin-bottom: 10px;
+    border: 1px solid rgb(128, 128, 128, 0.5);
+}
+
+.checkBox {
+    padding-left: 10px;
+    padding-bottom: 5px;
+}
+
+.filterBox h4{
+    margin-left: 5px;
+    padding-left: 5px;
+}
+
+
 p{
     padding-left: 1em;
 }

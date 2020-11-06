@@ -27,7 +27,7 @@ const WorkLoadMain = () => {
             justifyContent: "center",
             padding: 8
         }}>
-            <ButtonStrip dataTest ="dhis2-uicore-buttonstrip">
+            <ButtonStrip dataTest ="dhis2-uicore-buttonstrip" className={styles.ButtonStrip}>
                 <Button dataTest ="dhis2-uicore-button" type="button"
                     onClick={() => {
                         setClicked(<WorkLoad start={gen_date(0)} end={gen_date(5)} timeframe={5}/>)
@@ -44,12 +44,12 @@ const WorkLoadMain = () => {
                 </Button>
             
                 <Button dataTest="dhis2-uicore-button" type ="button"
-                    onClick={() => setClicked(<WorkLoad start={gen_date(-10)} end={gen_date(3)} timeframe={10}/>)}                    
+                    onClick={() => setClicked(<WorkLoad start={gen_date(0)} end={gen_date(10)} timeframe={10}/>)}                    
                 >
                 10-day
                 </Button>
                 <Button dataTest ="dhis2-uicore-button" type ="button"
-                    onClick={() => setClicked(<WorkLoad start={gen_date(-1)} end={gen_date(14)} timeframe={14}/>)}                    
+                    onClick={() => setClicked(<WorkLoad start={gen_date(0)} end={gen_date(14)} timeframe={14}/>)}                    
                 >
                 14-day
                 </Button>

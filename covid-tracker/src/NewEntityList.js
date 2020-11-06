@@ -71,8 +71,11 @@ const NewEntityList = () => {
     return (
         <div>
 
-            <div className={styles.filterbox}>
+            <div className={styles.filterBox}>
+                <h4>Filter</h4>
+
                 <Checkbox
+                    className={styles.checkBox}
                     label="Index Cases"
                     name="indC"
                     checked={indexChecked}
@@ -90,6 +93,8 @@ const NewEntityList = () => {
                 </Checkbox>
 
                 <Checkbox
+                    className={styles.checkBox}
+
                     checked={contactChecked}
                     label="Contact Cases"
                     name="conC"
@@ -146,17 +151,13 @@ const NewEntityList = () => {
 
                 <TableBody>
                 
-                {
-
-                    
-                }
-                {data.index.trackedEntityInstances.map((entity) => {
+                {(indexChecked || !contactChecked) && data.index.trackedEntityInstances.map((entity) => {
                     //console.log(entity)
                     return <CaseTable prop = {entity}/>
                 })}    
 
                 
-                {data.contact.trackedEntityInstances.map((entity) => {
+                {(!indexChecked || contactChecked) && data.contact.trackedEntityInstances.map((entity) => {
                     //console.log(entity)
                     return <CaseTable prop = {entity}/>
                 })}
