@@ -16,7 +16,7 @@ const MyApp = () => {
 
 
     return (
-        <div >
+        <div className={styles.container}>
             
             <nav className={styles.menu} data-test-id="menu">
                 <MenuSectionHeader label={i18n.t('Menu')} />

@@ -23,8 +23,9 @@ const entityQuery = {
           ou: "FdM1UhBUx5y",
           //Rakkestad, Viken kommune
           program: "DM9n1bUw8W8",
-          fields:["*"]
-
+          fields:["*"],
+          //dueDate: "2020-11-06"
+        
         },
     },
 
@@ -56,7 +57,9 @@ const attributeQuery = {
 const NewEntityList = () => {
     const { error, loading, data } = useDataQuery(entityQuery)
     const [clicked, setClicked] = useState(undefined)
-
+    const [indexChecked, setIndexChecked] = useState(false)
+    const [contactChecked, setContactChecked] = useState(false)
+    let a = false
     if (error) {
         return <p>Error</p>
     }
@@ -71,20 +74,35 @@ const NewEntityList = () => {
             <div className={styles.filterbox}>
                 <Checkbox
                     label="Index Cases"
-                    name="indc"
-                    value="checked"
+                    name="indC"
+                    checked={indexChecked}
+                    //value={indexChecked}
                     
-                    onChange={() => {console.log("testing")}}
+                    onChange={(_ref) => { console.log(_ref)
+                        console.log(document.getElementsByName("indC"))
+                        setIndexChecked(!indexChecked)
+
+                        if(contactChecked) {
+                            setContactChecked(false)
+                        }
+                        console.log("testing")}}
                     disbaled="false">
                 </Checkbox>
 
                 <Checkbox
-                    
+                    checked={contactChecked}
                     label="Contact Cases"
-                    name="indc"
+                    name="conC"
                     value="default"
-                    onChange={() => {console.log("testing other")}}
-                    >
+                    onChange={(_ref) => { console.log(_ref)
+                        console.log(document.getElementsByName("indC"))
+                        setContactChecked(!contactChecked)
+
+                        if(indexChecked) {
+                            setIndexChecked(false)
+                        }
+
+                        console.log("testing")}}                    >
                 </Checkbox>
 
             </div>
@@ -127,16 +145,21 @@ const NewEntityList = () => {
                 </TableHead>
 
                 <TableBody>
+                
+                {
+
+                    
+                }
                 {data.index.trackedEntityInstances.map((entity) => {
                     //console.log(entity)
                     return <CaseTable prop = {entity}/>
                 })}    
 
                 
-                {/*data.contact.trackedEntityInstances.map((entity) => {
+                {data.contact.trackedEntityInstances.map((entity) => {
                     //console.log(entity)
                     return <CaseTable prop = {entity}/>
-                })*/}
+                })}
                              
                 
 
