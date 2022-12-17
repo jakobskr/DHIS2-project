@@ -11,8 +11,6 @@ import { Overdue } from './Overdue'
 import { CasesOverview } from './CasesOverview'
 
 
-
-
 const MyApp = () => {
     const [clicked,setClicked] = useState(<NewEntityList/>)
 
